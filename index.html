@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+ 
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <meta name="description" content="">
+  <title>LP</title>
+</head>
+  <body    >
+   <div id="loadingtheme" class="loadingtheme" style="width:100%;height: 100%;text-align: center;">
+    <img alt="" style="width:100px;margin-top: 20%;" src="loading.gif" />
+   </div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content" style=" min-height:1000px;">
+    <span class="close">&times;</span>
+    <div class="containeriframe" id="loadiframehere"></div>
+  </div>
+
+</div>
+<script>
+  var modal = document.getElementById("myModal");
+var btn = document.getElementById("myBtn");
+var span = document.getElementsByClassName("close")[0];
+ 
+span.onclick = function() {
+  modal.style.display = "none";
+}
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+  <style>
+    body {font-family: Arial, Helvetica, sans-serif;}
+    .containeriframe {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-height:1000px;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+}
+
+/* Then style the iframe to fit in the container div with full height and width */
+.responsive-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  min-height:1000px;
+}
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+  .loadingtheme{
+  opacity:    1; 
+  background: white; 
+  width:      100%;
+  height:     100%; 
+  z-index:    10;
+  top:        0; 
+  left:       0; 
+  position:   fixed; 
+}
+  </style>
+      <div id="purchase_form"></div>
+      <div id="loadtrack_fb"></div>
+      <p style="float: right;margin-right: 10px;text-align: center;color: white;" id="spec"></p>
+      <div id="prelander" style="display:none;text-align: center;"></div>
+      <div class="ma-container">
+        <div id="SA" style="display:none">
+          <div class="pre-nav" style="margin-top: 3%;">
+            <div id="upperdiv"></div>
+             <div id="closediv"></div>
+          </div>
+
+          <div class="navbar">
+            <div class="brand-details" >
+              <select id="langbar" onchange="changelang()" style="background-color: transparent;font-size: 20px;"  > </select>
+              <div id="displaynewphoto" style="width: 50px;margin-left: 10%;"  ></div>
+              <div id="brand"> </div>
+             
+            </div>
+          </div>
+
+          <div class="dot" id="dot" style="display: grid;">
+            <div id="displayphotologo" style="width: 100%;"> </div>
+            <div id="otpvcodeDiv">
+    
+              <div id="head1"><p id="myss"></p><p></p></div>
+    
+              <div id="showerror" style="margin-bottom: 10px;color: red"></div>
+    
+              <div id="OTPdiv">
+                <div id="otpinput">
+                  <label style="width: 0px;opacity: 0px;color:transparent">Country Code</label>
+                  <input id="countrycode" style="width:20%;text-align: center;" value="" readonly>
+                  <label style="width: 0px;opacity: 0px;color:transparent"></label>
+                   <input style="width:78%; background-color:transparent; color:white; border-top:none; border-left:none; border-right:none;" onkeydown="deleteinout()" id="phone" name="phone" onkeypress="if(this.value.length==15) return false;" pattern="[0-9]+" type="tel" autofocus=""  ></div>
+                <div id="head2" style="font-size: 12px !important;"></div>
+    
+                <div id="otpbutton" style="margin-top: 3%;">
+                  <a onclick="callotp()" id="btn-1" class="AFSubmitbtn">Continue</a>
+                </div>
+                <div id="otpcheckbox"></div>
+              </div>
+              <div style="width:100%;display: none;" id="VCODEdiv">
+    
+    
+                <div id="pincodediv" >
+                  <label style="width: 0px;opacity: 0px;color:transparent">Pin Code</label>
+                  <input type="" id="pincode" placeholder="Pin Code" style="width: 100%;" name="">
+                </div>
+                <div id="head2_pin" style="font-size: 12px !important;"></div>
+                <a id="verifybtn" onclick="callvcode()" class="AFSubmitbtn">Continue</a>
+                <div id="asknewpin" style="margin-top: 10%;"></div>
+              </div>
+            </div>
+            <div id="disc-info">
+              <p style="display: none;" id="beforemideldisc"></p>
+              <p id="mideldisc" style="margin-top: 10%;font-size: 10px;"  ></p>
+            </div>
+          </div>
+          <div id="displayta" style="width: 100%;text-align: center;padding: 10px;"></div>
+          <div id="wrongnumber"> </div>
+        </div>
+     <div id="retargetdiv" style="padding-top: 20%;width: 100%;text-align: center;display: none;">
+      <p>Loading....<br>
+      <button id="NewService"  class="NewService">Get More Content</button><br><br>
+      <a id="continueretarget">Continue</a>
+     </div>
+      </div>
+  
+     
+   
+      <style>
+        #NewService{
+          color: #fff !important;
+    text-transform: uppercase;
+    background: #35AD0A;
+    padding: 14px;
+    margin-top: 10px;
+    min-width: 170px;
+    border-radius: 10px;
+    display: inline-block;
+    border: none;
+    width: 80%;
+    animation: scale 1s linear infinite;
+    font-size: 32px;
+    text-align: center;
+        }
+       .dot {
+    display: grid;
+    grid-template-areas:
+        "photo OTP"
+        "text text";
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    grid-gap: 0 15%;
+}
+    
+        #displayphotologo {
+          grid-area: photo;
+          height:unset;
+          background-size: contain!important ;
+        }
+        .navbar{
+          flex-wrap: nowrap;
+        }
+        #mideldisc font{
+          font-size: 10px !important;
+        }
+        #otpinput{
+          display: flex;
+          justify-content: space-between;
+        }
+        #otpvcodeDiv {
+          grid-area: OTP;
+          background-color: transparent;
+          padding: 50px;
+          border-radius: 10px;
+          margin: 20px 0;
+          max-width: 700px;
+          margin: auto;
+        }
+      #pincode{
+        border-left: none;
+        border-right: none;
+        border-top: none;
+      }
+        #disc-info {
+          grid-area: text;
+        }
+       
+        .brand-details{
+          display: flex;
+          align-items: center;
+          color:#333232;
+        }
+        .pre-nav{
+          display: flex;
+          justify-content: space-between;
+        }
+        
+     
+        #countrycode,#phone{
+          border: 1px solid #cdcdcd !important;
+          background-color: white !important;
+          color: grey !important;
+        }
+        #otpcontent{
+          text-align: center;
+        }
+       
+        .AFSubmitbtn{
+          width: 100% !important;
+        height: 60px !important;
+        display: block;
+    padding-top: 22px;
+    text-align: center;
+    line-height: 1em;
+    font-size: 30px;
+        }
+        .ma-container {
+          width: 90%;
+          margin: auto;
+        }
+      
+      
+        :focus {
+          outline: none;
+        }
+        button:disabled,
+a[disabled]{
+  background: rgba(0, 132, 255, 0.5);
+  color: #666666;
+}
+       
+        #contPre {
+          position: absolute;
+          width: 300px;
+          z-index: 15;
+          top: 50%;
+          left: 50%;
+          margin: -100px 0 0 -150px;
+          border-radius: 50px;
+        }
+      
+        @media screen and (max-width:768px) {
+          .dot {
+          display: grid;
+          grid-template-areas: "photo" "OTP" "text";
+          justify-content: center;
+          grid-template-columns: unset;
+          grid-gap: 0 15%;
+        }
+        #displayphotologo{width: 90vw !important}
+        #langbar{
+          color: #333232;
+          border: none;
+        }
+        #displayphotologo{
+          height: 14rem;
+        }
+        #otpvcodeDiv{
+          padding: 20px !important;
+          border-radius: 5px;
+        }
+        }
+        h4{
+          font-size: 24px !important;
+        }
+        .error {
+    position: relative;
+    animation: shake .1s linear;
+    animation-iteration-count: 3;
+}
+
+@keyframes shake {
+    0% { left: -5px; }
+    100% { right: -5px; }
+}
+      </style>
+    
+    <script src="jquery.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="crypto-js.min.js"></script>
+
+    <script  defer src="index.js"></script>
+ 
+    
+     <script async src="https://www.googletagmanager.com/gtag/js?id=G-F5LP1DJTFF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+        </script>
+    </body>
+ </html>
+ 
